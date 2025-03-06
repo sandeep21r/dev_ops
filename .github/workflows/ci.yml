@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Login to container registry
-        run: docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} docker.io
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
 
       - name: Build and push Docker image
         run: |
