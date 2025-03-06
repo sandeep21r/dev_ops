@@ -21,6 +21,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Make sure you're in the repository root
+          ls -R  # (Optional) Debug listing of all files/folders
           pip install -r app/requirements.txt
           pip install pytest
 
