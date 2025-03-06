@@ -51,7 +51,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t sandy21/devops_project:latest .
+          docker build -t sandy283/devops_project:latest .
           docker push sandy283/devops_project:latest
 
       - name: Deploy to production
