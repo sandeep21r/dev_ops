@@ -30,4 +30,4 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t my-devops-project:ci-test .
+          docker build -t devops_project:ci-test .
