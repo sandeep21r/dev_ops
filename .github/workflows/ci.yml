@@ -5,7 +5,6 @@ on:
     branches: [ "main" ]  # This triggers the deployment when PRs are merged into main
   pull_request:
     branches: [ "main" ]  # This triggers the CI for PRs
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -59,7 +58,6 @@ jobs:
         run: |
           docker build -t sandy283/devops_project:latest .
           docker push sandy283/devops_project:latest
-
 
       - name: Deploy to EC2
         run: |
