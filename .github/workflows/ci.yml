@@ -45,6 +45,13 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}  # Using SSH key from GitHub Secrets
+
+
       - name: Login to container registry
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin docker.io
         
@@ -53,6 +60,6 @@ jobs:
           docker build -t sandy283/devops_project:latest .
           docker push sandy283/devops_project:latest
 
-      - name: Deploy to production
+      - name: Deploy to AWS EC2
         run: |
-          ssh user@your-server "docker pull sandy283/devops_project:latest && docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} ubuntu@${{ secrets.AWS_EC2_IP }} "docker pull sandy283/devops_project:latest && docker-compose up -d"
