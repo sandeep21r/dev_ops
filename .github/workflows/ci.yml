@@ -60,6 +60,7 @@ jobs:
           docker build -t sandy283/devops_project:latest .
           docker push sandy283/devops_project:latest
 
+
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} ubuntu@${{ secrets.AWS_EC2_IP }} "docker pull sandy283/devops_project:latest && docker-compose up -d"
