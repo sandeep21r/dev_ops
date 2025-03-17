@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]  # This triggers the deployment when PRs are merged into main
   pull_request:
     branches: [ "main" ]  # This triggers the CI for PRs
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -40,6 +41,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      # Set up SSH agent to use the private key stored in GitHub Secrets
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
