@@ -70,6 +70,10 @@ jobs:
 
 
 
+
+      # Deploy to EC2 by pulling the Docker image and running it
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/aws-ec2-key ubuntu@${{ secrets.AWS_EC2_IP }} "sudo docker pull sandy283/devops_project:latest && sudo docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/aws-ec2-key ubuntu@${{ secrets.AWS_EC2_IP }} \
+          "sudo docker pull sandy283/devops_project:latest && \
+          sudo docker run -d --name devops_project sandy283/devops_project:latest"
