@@ -69,8 +69,6 @@ jobs:
           docker push sandy283/devops_project:latest
 
 
-
-
       # Deploy to EC2 by pulling the Docker image and running it
       - name: Deploy to EC2
         run: |
