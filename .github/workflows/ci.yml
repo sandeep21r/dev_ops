@@ -47,6 +47,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
 
+      
+      # Create the private key file for SSH and set proper permissions
+      - name: Write the SSH private key to a file
+        run: |
+          echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/aws-ec2-key
+          chmod 600 ~/.ssh/aws-ec2-key  # Set appropriate permissions for the private key file
+
       # Add EC2 host key to known_hosts
       - name: Add known_hosts for EC2
         run: |
@@ -63,6 +70,7 @@ jobs:
 
 
 
+      # Run the Docker commands on the EC2 instance
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} ubuntu@${{ secrets.AWS_EC2_IP }} "docker pull sandy283/devops_project:latest && docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/aws-ec2-key ubuntu@${{ secrets.AWS_EC2_IP }} "docker pull sandy283/devops_project:latest && docker-compose up -d"
